@@ -1,0 +1,402 @@
+[32mdefault-jdk[0m/kali-rolling 2:1.25-77 amd64
+  Standard Java or Java compatible Development Kit
+
+[32mdefault-jdk-doc[0m/kali-rolling 2:1.25-77 amd64
+  Standard Java or Java compatible Development Kit (documentation)
+
+[32mdefault-jdk-headless[0m/kali-rolling,now 2:1.25-77 amd64 [installed,automatic]
+  Standard Java or Java compatible Development Kit (headless)
+
+[32mdefault-jre[0m/kali-rolling,now 2:1.25-77 amd64 [installed,automatic]
+  Standard Java or Java compatible Runtime
+
+[32mdefault-jre-headless[0m/kali-rolling,now 2:1.25-77 amd64 [installed,automatic]
+  Standard Java or Java compatible Runtime (headless)
+
+[32mgolang-github-jdkato-prose-dev[0m/kali-rolling,kali-rolling,kali-rolling 1.2.1-1 all
+  Golang library for text processing
+
+[32mgolang-github-jdkato-syllables-dev[0m/kali-rolling,kali-rolling,kali-rolling 0.1.0+git20201111.918fed7-1 all
+  Go syllable counter
+
+[32mgoogle-android-tools-installer[0m/kali-rolling 26.1.1+1785528795-1 amd64
+  Google's 'Android SDK Tools' Installer
+
+[32mjapitools[0m/kali-rolling,kali-rolling,kali-rolling 0.9.7+git20150619-1 all
+  Java API compatibility testing tools
+
+[32mjattach[0m/kali-rolling 2.2-2 amd64
+  JVM Dynamic Attach utility all in one jmap jstack jcmd jinfo
+
+[32mjava3ds-fileloader[0m/kali-rolling,kali-rolling,kali-rolling 1.2+dfsg-4 all
+  Java3D 3DS File Loader
+
+[32mjtreg[0m/kali-rolling,kali-rolling,kali-rolling 5.1-b01-2 all
+  Regression Test Harness for the OpenJDK platform
+
+[32mjtreg6[0m/kali-rolling,kali-rolling,kali-rolling 6.2+1-4 all
+  Regression Test Harness for the OpenJDK platform
+
+[32mjtreg7[0m/kali-rolling,kali-rolling,kali-rolling 7.5.2+1+ds2-3 all
+  Regression Test Harness for the OpenJDK platform
+
+[32mjtreg8[0m/kali-rolling,kali-rolling,kali-rolling 8.3+1+ds1-1 all
+  Regression Test Harness for the OpenJDK platform
+
+[32mlibanimal-sniffer-java[0m/kali-rolling,kali-rolling,kali-rolling 1.16-2 all
+  JDK/API verification tools
+
+[32mlibasm-jdk-bridge-java[0m/kali-rolling,kali-rolling,kali-rolling 0.0.13-1 all
+  ASM API adapter for the JDK Class File API
+
+[32mlibasmtools-java[0m/kali-rolling,kali-rolling,kali-rolling 7.0-b09-3 all
+  OpenJDK AsmTools
+
+[32mlibassertj-core-java[0m/kali-rolling,kali-rolling,kali-rolling 3.26.3-2 all
+  Fluent assertions for Java
+
+[32mlibbackport9-java[0m/kali-rolling,kali-rolling,kali-rolling 1.10-2 all
+  Collection of backports and utilities for apps and libraries
+
+[32mlibbcjmail-java[0m/kali-rolling,kali-rolling,kali-rolling 1.80-3 all
+  Bouncy Castle Jakarta S/MIME API
+
+[32mlibcava-java[0m/kali-rolling,kali-rolling,kali-rolling 0.6.0-2 all
+  Libraries and tools for blockchain and decentralized software
+
+[32mlibcolt-free-java[0m/kali-rolling,kali-rolling,kali-rolling 1.2.0+dfsg-9 all
+  scalable scientific and technical computing in Java
+
+[32mlibcolt-free-java-doc[0m/kali-rolling,kali-rolling,kali-rolling 1.2.0+dfsg-9 all
+  scalable scientific and technical computing in Java (doc)
+
+[32mlibcommons-collections3-java[0m/kali-rolling,kali-rolling,kali-rolling,now 3.2.2-3 all [installed,automatic]
+  Apache Commons Collections - Extended Collections API for Java
+
+[32mlibcommons-collections4-java[0m/kali-rolling,kali-rolling,kali-rolling 4.4-2 all
+  Apache Commons Collections - Extended Collections API for Java
+
+[32mlibcommons-collections4-java-doc[0m/kali-rolling,kali-rolling,kali-rolling 4.4-2 all
+  Documentation for Commons Collections 4
+
+[32mlibcommons-lang-java[0m/kali-rolling,kali-rolling,kali-rolling,now 2.6-12 all [installed,automatic]
+  Commons Lang - an extension of the java.lang package
+
+[32mlibcommons-lang-java-doc[0m/kali-rolling,kali-rolling,kali-rolling 2.6-12 all
+  Documentation for Commons Lang - an extension of the java.lang package
+
+[32mlibcommons-math-java[0m/kali-rolling,kali-rolling,kali-rolling 2.2-9 all
+  Java lightweight mathematics and statistics components
+
+[32mlibcommons-math3-java[0m/kali-rolling,kali-rolling,kali-rolling 3.6.1-4 all
+  Java lightweight mathematics and statistics components
+
+[32mlibcommons-math3-java-doc[0m/kali-rolling,kali-rolling,kali-rolling 3.6.1-4 all
+  Java lightweight mathematics and statistics components - documentation
+
+[32mlibgkl-java[0m/kali-rolling,kali-rolling,kali-rolling 0.9.1+dfsg-3 all
+  Java library to manipulate SAM and BAM files
+
+[32mlibgkl-jni[0m/kali-rolling 0.9.1+dfsg-3 amd64
+  native libraries of Java library to manipulate SAM and BAM files
+
+[32mlibgrpc-java[0m/kali-rolling,kali-rolling,kali-rolling 1.41.3+ds-5 all
+  Java gRPC implementation, HTTP/2 based RPC
+
+[32mlibhawtbuf-java[0m/kali-rolling,kali-rolling,kali-rolling 1.11-2 all
+  HawtBuf rich byte buffer library
+
+[32mlibhessian-java[0m/kali-rolling,kali-rolling,kali-rolling 4.0.38-3 all
+  Java implementation of a binary protocol for web services
+
+[32mlibhessian-java-doc[0m/kali-rolling,kali-rolling,kali-rolling 4.0.38-3 all
+  Documentation for libhessian-java
+
+[32mlibhibernate-commons-annotations-java[0m/kali-rolling,kali-rolling,kali-rolling 3.2.0.Final-5 all
+  Hibernate Commons Annotations
+
+[32mlibhsdis0-fcml[0m/kali-rolling 1.3.0-2+b1 amd64
+  HotSpot disassembler plugin using FCML
+
+[32mlibhtsjdk-java[0m/kali-rolling,kali-rolling,kali-rolling 5.0.0+dfsg-1 all
+  Java API for high-throughput sequencing data (HTS) formats
+
+[32mlibhtsjdk-java-doc[0m/kali-rolling,kali-rolling,kali-rolling 5.0.0+dfsg-1 all
+  Documentation for the java HTSJDK library
+
+[32mlibicu4j-4.4-java[0m/kali-rolling,kali-rolling,kali-rolling 4.4.2.2-4 all
+  Library for Unicode support and internationalization
+
+[32mlibicu4j-java[0m/kali-rolling,kali-rolling,kali-rolling 77.1-1 all
+  Library for Unicode support and internationalization
+
+[32mlibintellij-java-compatibility-java[0m/kali-rolling,kali-rolling,kali-rolling 1.0.1-2 all
+  Classes from JDK8 excluded from JDK9
+
+[32mlibjackson2-jr-java[0m/kali-rolling,kali-rolling,kali-rolling 2.14.0-1 all
+  JSON library for Java -- standalone data-binding module
+
+[32mlibjax-maven-plugin[0m/kali-rolling,kali-rolling,kali-rolling 0.2+dfsg-2 all
+  Using the xjc goal with OpenJDK 11+
+
+[32mlibjboss-logmanager-java[0m/kali-rolling,kali-rolling,kali-rolling 2.1.18-1 all
+  implementation of java.util.logging.LogManager
+
+[32mlibjctools-java[0m/kali-rolling,kali-rolling,kali-rolling 4.0.5+dfsg-1 all
+  Java Concurrency Tools for the JVM
+
+[32mlibjheaps-java[0m/kali-rolling,kali-rolling,kali-rolling 0.14-3 all
+  Java library with various heap implementations
+
+[32mlibjws-api-java[0m/kali-rolling,kali-rolling,kali-rolling 1.1-2 all
+  Java EE Web Services Metadata API (JSR 181)
+
+[32mlibjxp-java[0m/kali-rolling,kali-rolling,kali-rolling 1.6.1-7 all
+  Java template engine/script processor
+
+[32mlibmaven-enforcer-plugin-java[0m/kali-rolling,kali-rolling,kali-rolling 3.5.0-1 all
+  Maven build rule execution framework
+
+[32mlibnb-javaparser-java[0m/kali-rolling,kali-rolling,kali-rolling 9+2018-2 all
+  Parser for the Java language which is good for use in tools
+
+[32mlibpicocontainer1-java[0m/kali-rolling,kali-rolling,kali-rolling 1.3-4 all
+  Java library implementing the Dependency Injection pattern
+
+[32mlibpracticalxml-java[0m/kali-rolling,kali-rolling,kali-rolling 1.1.19-2 all
+  practical XML handling routines
+
+[32mlibreoffice[0m/kali-rolling 4:26.2.5.2-2 amd64
+  office productivity suite (metapackage)
+
+[32mlibslf4j-java[0m/kali-rolling,kali-rolling,kali-rolling,now 1.7.32-2 all [installed,automatic]
+  Simple Logging Facade for Java
+
+[32mlibslf4j2-java[0m/kali-rolling,kali-rolling,kali-rolling 2.0.17-1 all
+  Simple Logging Facade for Java
+
+[32mlibtestng7-java[0m/kali-rolling,kali-rolling,kali-rolling 7.5-3 all
+  testing framework for Java
+
+[32mlibthreeten-extra-java[0m/kali-rolling,kali-rolling,kali-rolling 1.6.0-1 all
+  Additional functionality that enhances JSR-310 dates and times
+
+[32mlibtrove-intellij-java[0m/kali-rolling,kali-rolling,kali-rolling 1.0.20190514-2 all
+  high performance collections for java
+
+[32mlibtrove-java[0m/kali-rolling,kali-rolling,kali-rolling 2.1.0-4 all
+  high performance collections for java
+
+[32mlibtrove-java-doc[0m/kali-rolling,kali-rolling,kali-rolling 2.1.0-4 all
+  high performance collections for java
+
+[32mlibtrove3-java[0m/kali-rolling,kali-rolling,kali-rolling 3.0.3-6 all
+  high performance collections for java
+
+[32mlibtrove3-java-doc[0m/kali-rolling,kali-rolling,kali-rolling 3.0.3-6 all
+  high performance collections for java
+
+[32mlibvisualvm-jni[0m/kali-rolling 2.2-1 amd64
+  All-in-One Java Troubleshooting Tool (JNI libraries)
+
+[32mlyx[0m/kali-rolling 2.5.2-1 amd64
+  document processor
+
+[32mmmake[0m/kali-rolling,kali-rolling,kali-rolling 2.3-10 all
+  Makefile generator for Java programs
+
+[32mopenjdk-11-dbg[0m/kali-rolling 11.0.31+11-1 amd64
+  Java runtime based on OpenJDK (debugging symbols)
+
+[32mopenjdk-11-demo[0m/kali-rolling 11.0.31+11-1 amd64
+  Java runtime based on OpenJDK (demos and examples)
+
+[32mopenjdk-11-doc[0m/kali-rolling,kali-rolling,kali-rolling 11.0.31+11-1 all
+  OpenJDK Development Kit (JDK) documentation
+
+[32mopenjdk-11-jdk[0m/kali-rolling 11.0.31+11-1 amd64
+  OpenJDK Development Kit (JDK)
+
+[32mopenjdk-11-jdk-headless[0m/kali-rolling,now 11.0.31+11-1 amd64 [installed,automatic]
+  OpenJDK Development Kit (JDK) (headless)
+
+[32mopenjdk-11-jre[0m/kali-rolling,now 11.0.31+11-1 amd64 [installed,automatic]
+  OpenJDK Java runtime, using Hotspot JIT
+
+[32mopenjdk-11-jre-headless[0m/kali-rolling,now 11.0.31+11-1 amd64 [installed,automatic]
+  OpenJDK Java runtime, using Hotspot JIT (headless)
+
+[32mopenjdk-11-jre-zero[0m/kali-rolling 11.0.31+11-1 amd64
+  Alternative JVM for OpenJDK, using Zero
+
+[32mopenjdk-11-source[0m/kali-rolling,kali-rolling,kali-rolling 11.0.31+11-1 all
+  OpenJDK Development Kit (JDK) source files
+
+[32mopenjdk-21-dbg[0m/kali-rolling 21.0.12~5ea-1 amd64
+  Java runtime based on OpenJDK (debugging symbols)
+
+[32mopenjdk-21-demo[0m/kali-rolling 21.0.12~5ea-1 amd64
+  Java runtime based on OpenJDK (demos and examples)
+
+[32mopenjdk-21-doc[0m/kali-rolling,kali-rolling,kali-rolling 21.0.12~5ea-1 all
+  OpenJDK Development Kit (JDK) documentation
+
+[32mopenjdk-21-jdk[0m/kali-rolling,now 21.0.12~5ea-1 amd64 [installed]
+  OpenJDK Development Kit (JDK)
+
+[32mopenjdk-21-jdk-headless[0m/kali-rolling,now 21.0.12~5ea-1 amd64 [installed,automatic]
+  OpenJDK Development Kit (JDK) (headless)
+
+[32mopenjdk-21-jre[0m/kali-rolling,now 21.0.12~5ea-1 amd64 [installed]
+  OpenJDK Java runtime, using Hotspot JIT
+
+[32mopenjdk-21-jre-headless[0m/kali-rolling,now 21.0.12~5ea-1 amd64 [installed,automatic]
+  OpenJDK Java runtime, using Hotspot JIT (headless)
+
+[32mopenjdk-21-jre-zero[0m/kali-rolling 21.0.12~5ea-1 amd64
+  Alternative JVM for OpenJDK, using Zero
+
+[32mopenjdk-21-source[0m/kali-rolling,kali-rolling,kali-rolling 21.0.12~5ea-1 all
+  OpenJDK Development Kit (JDK) source files
+
+[32mopenjdk-21-testsupport[0m/kali-rolling 21.0.12~5ea-1 amd64
+  Java runtime based on OpenJDK (regression test support)
+
+[32mopenjdk-25-dbg[0m/kali-rolling 25.0.4+7-1 amd64
+  Java runtime based on OpenJDK (debugging symbols)
+
+[32mopenjdk-25-demo[0m/kali-rolling 25.0.4+7-1 amd64
+  Java runtime based on OpenJDK (demos and examples)
+
+[32mopenjdk-25-doc[0m/kali-rolling,kali-rolling,kali-rolling 25.0.4+7-1 all
+  OpenJDK Development Kit (JDK) documentation
+
+[32mopenjdk-25-jdk[0m/kali-rolling 25.0.4+7-1 amd64
+  OpenJDK Development Kit (JDK)
+
+[32mopenjdk-25-jdk-headless[0m/kali-rolling,now 25.0.4+7-1 amd64 [installed,automatic]
+  OpenJDK Development Kit (JDK) (headless)
+
+[32mopenjdk-25-jre[0m/kali-rolling,now 25.0.4+7-1 amd64 [installed,automatic]
+  OpenJDK Java runtime, using Hotspot JIT
+
+[32mopenjdk-25-jre-headless[0m/kali-rolling,now 25.0.4+7-1 amd64 [installed,automatic]
+  OpenJDK Java runtime, using Hotspot JIT (headless)
+
+[32mopenjdk-25-jre-zero[0m/kali-rolling 25.0.4+7-1 amd64
+  Alternative JVM for OpenJDK, using Zero
+
+[32mopenjdk-25-source[0m/kali-rolling,kali-rolling,kali-rolling 25.0.4+7-1 all
+  OpenJDK Development Kit (JDK) source files
+
+[32mopenjdk-25-testsupport[0m/kali-rolling 25.0.4+7-1 amd64
+  Java runtime based on OpenJDK (regression test support)
+
+[32mopenjdk-26-dbg[0m/kali-rolling 26+35-2 amd64
+  Java runtime based on OpenJDK (debugging symbols)
+
+[32mopenjdk-26-demo[0m/kali-rolling 26+35-2 amd64
+  Java runtime based on OpenJDK (demos and examples)
+
+[32mopenjdk-26-doc[0m/kali-rolling,kali-rolling,kali-rolling 26+35-2 all
+  OpenJDK Development Kit (JDK) documentation
+
+[32mopenjdk-26-jdk[0m/kali-rolling 26+35-2 amd64
+  OpenJDK Development Kit (JDK)
+
+[32mopenjdk-26-jdk-headless[0m/kali-rolling 26+35-2 amd64
+  OpenJDK Development Kit (JDK) (headless)
+
+[32mopenjdk-26-jre[0m/kali-rolling 26+35-2 amd64
+  OpenJDK Java runtime, using Hotspot JIT
+
+[32mopenjdk-26-jre-headless[0m/kali-rolling 26+35-2 amd64
+  OpenJDK Java runtime, using Hotspot JIT (headless)
+
+[32mopenjdk-26-jre-zero[0m/kali-rolling 26+35-2 amd64
+  Alternative JVM for OpenJDK, using Zero
+
+[32mopenjdk-26-source[0m/kali-rolling,kali-rolling,kali-rolling 26+35-2 all
+  OpenJDK Development Kit (JDK) source files
+
+[32mopenjdk-26-testsupport[0m/kali-rolling 26+35-2 amd64
+  Java runtime based on OpenJDK (regression test support)
+
+[32mopenjdk-27-dbg[0m/kali-rolling 27~24ea-2 amd64
+  Java runtime based on OpenJDK (debugging symbols)
+
+[32mopenjdk-27-demo[0m/kali-rolling 27~24ea-2 amd64
+  Java runtime based on OpenJDK (demos and examples)
+
+[32mopenjdk-27-doc[0m/kali-rolling,kali-rolling,kali-rolling 27~24ea-2 all
+  OpenJDK Development Kit (JDK) documentation
+
+[32mopenjdk-27-jdk[0m/kali-rolling 27~24ea-2 amd64
+  OpenJDK Development Kit (JDK)
+
+[32mopenjdk-27-jdk-headless[0m/kali-rolling 27~24ea-2 amd64
+  OpenJDK Development Kit (JDK) (headless)
+
+[32mopenjdk-27-jre[0m/kali-rolling 27~24ea-2 amd64
+  OpenJDK Java runtime, using Hotspot JIT
+
+[32mopenjdk-27-jre-headless[0m/kali-rolling 27~24ea-2 amd64
+  OpenJDK Java runtime, using Hotspot JIT (headless)
+
+[32mopenjdk-27-jre-zero[0m/kali-rolling 27~24ea-2 amd64
+  Alternative JVM for OpenJDK, using Zero
+
+[32mopenjdk-27-source[0m/kali-rolling,kali-rolling,kali-rolling 27~24ea-2 all
+  OpenJDK Development Kit (JDK) source files
+
+[32mopenjdk-27-testsupport[0m/kali-rolling 27~24ea-2 amd64
+  Java runtime based on OpenJDK (regression test support)
+
+[32mopenjdk-28-dbg[0m/kali-rolling 28~11ea-1 amd64
+  Java runtime based on OpenJDK (debugging symbols)
+
+[32mopenjdk-28-demo[0m/kali-rolling 28~11ea-1 amd64
+  Java runtime based on OpenJDK (demos and examples)
+
+[32mopenjdk-28-doc[0m/kali-rolling,kali-rolling,kali-rolling 28~11ea-1 all
+  OpenJDK Development Kit (JDK) documentation
+
+[32mopenjdk-28-jdk[0m/kali-rolling 28~11ea-1 amd64
+  OpenJDK Development Kit (JDK)
+
+[32mopenjdk-28-jdk-headless[0m/kali-rolling 28~11ea-1 amd64
+  OpenJDK Development Kit (JDK) (headless)
+
+[32mopenjdk-28-jre[0m/kali-rolling 28~11ea-1 amd64
+  OpenJDK Java runtime, using Hotspot JIT
+
+[32mopenjdk-28-jre-headless[0m/kali-rolling 28~11ea-1 amd64
+  OpenJDK Java runtime, using Hotspot JIT (headless)
+
+[32mopenjdk-28-jre-zero[0m/kali-rolling 28~11ea-1 amd64
+  Alternative JVM for OpenJDK, using Zero
+
+[32mopenjdk-28-source[0m/kali-rolling,kali-rolling,kali-rolling 28~11ea-1 all
+  OpenJDK Development Kit (JDK) source files
+
+[32mopenjdk-28-testsupport[0m/kali-rolling 28~11ea-1 amd64
+  Java runtime based on OpenJDK (regression test support)
+
+[32msubstance[0m/kali-rolling,kali-rolling,kali-rolling 7.3+dfsg3-6 all
+  cross-platform look & feel for Swing applications
+
+[32msubstance-doc[0m/kali-rolling,kali-rolling,kali-rolling 7.3+dfsg3-6 all
+  cross-platform look & feel for Swing applications - documentation
+
+[32msubstance-flamingo[0m/kali-rolling,kali-rolling,kali-rolling 7.3+dfsg3-6 all
+  Substance Flamingo plugin
+
+[32msubstance-flamingo-doc[0m/kali-rolling,kali-rolling,kali-rolling 7.3+dfsg3-6 all
+  Substance Flamingo plugin (documentation)
+
+[32mtestng[0m/kali-rolling,kali-rolling,kali-rolling,now 6.9.12-5 all [installed,automatic]
+  testing framework for Java
+
+[32mvisualvm[0m/kali-rolling,kali-rolling,kali-rolling 2.2-1 all
+  All-in-One Java Troubleshooting Tool
+

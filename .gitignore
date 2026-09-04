@@ -1,0 +1,51 @@
+# Gradle
+.gradle/
+build/
+*/build/
+!*/build.gradle.kts
+!*/build.gradle
+
+# Local configuration
+local.properties
+*.iml
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Kotlin
+*.kt.html
+
+# Generated files
+app/build/
+*.apk
+*.aab
+*.ap_
+
+# Keystores
+*.jks
+*.keystore
+
+# Crashlytics
+crashlytics.properties
+fabric.properties
+
+# Coverage
+*.ec
+*.gradle
+
+# Signing
+signing.properties
+
+# Temporary files
+*.log
+*.tmp
+
+# DataStore preferences (runtime)
+datastore/

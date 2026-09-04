@@ -23,13 +23,33 @@ android {
         }
     }
 
+    // Signing config - uses debug keystore for CI, allows override via local.properties
+    val releaseStoreFile = project.findProperty("RELEASE_STORE_FILE") as String? ?: "debug.keystore"
+    val releaseStorePassword = project.findProperty("RELEASE_STORE_PASSWORD") as String? ?: "android"
+    val releaseKeyAlias = project.findProperty("RELEASE_KEY_ALIAS") as String? ?: "androiddebugkey"
+    val releaseKeyPassword = project.findProperty("RELEASE_KEY_PASSWORD") as String? ?: "android"
+
+    signingConfigs {
+        create("release") {
+            storeFile = file(releaseStoreFile)
+            storePassword = releaseStorePassword
+            keyAlias = releaseKeyAlias
+            keyPassword = releaseKeyPassword
+        }
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false // Disable minification for simpler CI builds
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
+        }
+        debug {
+            isMinifyEnabled = false
+            isDebuggable = true
         }
     }
 

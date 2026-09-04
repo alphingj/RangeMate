@@ -11,6 +11,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.rangemate.data.model.BmsData
+import com.rangemate.data.range.AdaptiveRangeEngine
+import com.rangemate.data.range.DrivingPattern
+import com.rangemate.data.range.RangePrediction
 import com.rangemate.ui.screens.dashboard.components.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -26,6 +29,8 @@ fun DashboardScreen(
     val globalSettings by viewModel.globalSettings.collectAsStateWithLifecycle()
     val speedKmh by viewModel.speedKmh.collectAsStateWithLifecycle()
     val isGpsEnabled by viewModel.isGpsEnabled.collectAsStateWithLifecycle()
+    val rangePrediction by viewModel.rangePrediction.collectAsStateWithLifecycle<RangePrediction?>()
+    val drivingPattern by viewModel.drivingPattern.collectAsStateWithLifecycle<DrivingPattern?>()
 
     Scaffold(
         topBar = {
@@ -73,10 +78,19 @@ fun DashboardScreen(
                         voltage = bmsData.voltage
                     )
                     Spacer(modifier = Modifier.height(16.dp))
-                    RangeDisplay(
-                        range = bmsData.range,
-                        unit = deviceSettings.distanceUnit
-                    )
+                    
+                    // Adaptive range display (if available) or basic range
+                    if (rangePrediction != null) {
+                        AdaptiveRangeDisplay(
+                            prediction = rangePrediction,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    } else {
+                        RangeDisplay(
+                            range = bmsData.range,
+                            unit = deviceSettings.distanceUnit
+                        )
+                    }
                 }
 
                 Spacer(modifier = Modifier.width(32.dp))

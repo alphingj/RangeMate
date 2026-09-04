@@ -4,6 +4,10 @@ import android.content.Context
 import com.rangemate.data.ble.BleManager
 import com.rangemate.data.location.SpeedProvider
 import com.rangemate.data.preferences.PreferencesManager
+import com.rangemate.data.range.AdaptiveRangeEngine
+import com.rangemate.data.range.RangeViewModel
+import com.rangemate.data.range.RideTracker
+import com.rangemate.data.repository.BmsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,4 +34,23 @@ object AppModule {
     @Provides
     @Singleton
     fun providePreferencesManager(): PreferencesManager = PreferencesManager()
+
+    @Provides
+    @Singleton
+    fun provideAdaptiveRangeEngine(): AdaptiveRangeEngine = AdaptiveRangeEngine()
+
+    @Provides
+    @Singleton
+    fun provideRideTracker(
+        bmsRepository: BmsRepository,
+        adaptiveRangeEngine: AdaptiveRangeEngine
+    ): RideTracker = RideTracker(bmsRepository, adaptiveRangeEngine)
+
+    @Provides
+    @Singleton
+    fun provideRangeViewModel(
+        adaptiveRangeEngine: AdaptiveRangeEngine,
+        rideTracker: RideTracker,
+        bmsRepository: BmsRepository
+    ): RangeViewModel = RangeViewModel(adaptiveRangeEngine, rideTracker, bmsRepository)
 }

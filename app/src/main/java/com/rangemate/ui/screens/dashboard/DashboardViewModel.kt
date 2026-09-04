@@ -5,6 +5,11 @@ import com.rangemate.data.model.BmsData
 import com.rangemate.data.preferences.DevicePreferences
 import com.rangemate.data.preferences.GlobalPreferences
 import com.rangemate.data.preferences.PreferencesManager
+import com.rangemate.data.range.AdaptiveRangeEngine
+import com.rangemate.data.range.DrivingPattern
+import com.rangemate.data.range.RangePrediction
+import com.rangemate.data.range.RangeViewModel
+import com.rangemate.data.range.RideTracker
 import com.rangemate.data.repository.BmsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -16,7 +21,10 @@ import javax.inject.Inject
 class DashboardViewModel @Inject constructor(
     private val bmsRepository: BmsRepository,
     private val preferences: PreferencesManager,
-    private val speedProvider: SpeedProvider
+    private val speedProvider: SpeedProvider,
+    private val rangeViewModel: RangeViewModel,
+    private val rideTracker: RideTracker,
+    private val adaptiveRangeEngine: AdaptiveRangeEngine
 ) : ViewModel() {
 
     val bmsData: StateFlow<BmsData> = bmsRepository.bmsData
@@ -42,12 +50,17 @@ class DashboardViewModel @Inject constructor(
     val isGpsEnabled: StateFlow<Boolean> = speedProvider.isEnabled
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
 
+    // Adaptive range prediction
+    val rangePrediction: StateFlow<RangePrediction?> = rangeViewModel.calculatedRange
+    val drivingPattern: StateFlow<DrivingPattern?> = rangeViewModel.drivingPattern
+
     // Power history for graph (last 60 seconds)
     private val _powerHistory = MutableStateFlow<List<Pair<Long, Float>>>(emptyList())
     val powerHistory: StateFlow<List<Pair<Long, Float>>> = _powerHistory.asStateFlow()
 
     init {
         speedProvider.start()
+        rideTracker.startTracking()
 
         // Collect power data for graph
         bmsRepository.bmsData
@@ -67,5 +80,6 @@ class DashboardViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         speedProvider.stop()
+        rideTracker.stopTracking()
     }
 }

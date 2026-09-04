@@ -35,8 +35,10 @@ fun ConnectScreen(
     val scanResults by viewModel.scanResults.collectAsStateWithLifecycle()
     val isScanning by viewModel.isScanning.collectAsStateWithLifecycle()
     val connectionState by viewModel.connectionState.collectAsStateWithLifecycle()
+    val connectedMac by viewModel.connectedMac.collectAsStateWithLifecycle()
 
     var hasPermissions by remember { mutableStateOf(false) }
+    var hasRecordedConnection by remember { mutableStateOf(false) }
 
     val permissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestMultiplePermissions()
@@ -72,9 +74,14 @@ fun ConnectScreen(
         }
     }
 
-    LaunchedEffect(connectionState) {
-        if (connectionState == BleManager.ConnectionState.CONNECTED) {
+    LaunchedEffect(connectionState, connectedMac) {
+        val mac = connectedMac
+        if (connectionState == BleManager.ConnectionState.CONNECTED && mac != null && !hasRecordedConnection) {
+            hasRecordedConnection = true
+            viewModel.onDeviceConnected(mac)
             onDeviceConnected()
+        } else if (connectionState != BleManager.ConnectionState.CONNECTED) {
+            hasRecordedConnection = false
         }
     }
 

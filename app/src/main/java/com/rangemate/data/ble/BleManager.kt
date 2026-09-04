@@ -56,6 +56,9 @@ class BleManager @Inject constructor(
     private val _deviceName = MutableStateFlow<String?>(null)
     val deviceName: StateFlow<String?> = _deviceName.asStateFlow()
 
+    private val _connectedDeviceMac = MutableStateFlow<String?>(null)
+    val connectedDeviceMac: StateFlow<String?> = _connectedDeviceMac.asStateFlow()
+
     private val scanCallback = object : ScanCallback() {
         override fun onScanResult(callbackType: Int, result: ScanResult) {
             val current = _scanResults.value.toMutableList()
@@ -171,6 +174,7 @@ class BleManager @Inject constructor(
         stopScan()
         _connectionState.value = ConnectionState.CONNECTING
         _deviceName.value = device.name
+        _connectedDeviceMac.value = device.address
         bluetoothGatt = device.connectGatt(context, false, gattCallback)
     }
 
@@ -184,6 +188,7 @@ class BleManager @Inject constructor(
         _connectionState.value = ConnectionState.DISCONNECTED
         _bmsData.value = null
         _deviceName.value = null
+        _connectedDeviceMac.value = null
     }
 
     @SuppressLint("MissingPermission")

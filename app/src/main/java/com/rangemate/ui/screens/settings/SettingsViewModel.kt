@@ -1,9 +1,16 @@
 package com.rangemate.ui.screens.settings
 
+import com.rangemate.data.preferences.DevicePreferences
+import com.rangemate.data.preferences.GlobalPreferences
 import com.rangemate.data.preferences.PreferencesManager
-import com.rangemate.data.preferences.UserPreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import androidx.lifecycle.ViewModel
@@ -15,50 +22,116 @@ class SettingsViewModel @Inject constructor(
     private val preferences: PreferencesManager
 ) : ViewModel() {
 
-    val settings = preferences.userPreferences
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), UserPreferences())
+    private var currentDeviceMac: String? = null
 
+    fun setCurrentDevice(macAddress: String) {
+        currentDeviceMac = macAddress
+    }
+
+    // Device settings as a reactive flow
+    private val _deviceSettings = MutableStateFlow<DevicePreferences?>(null)
+    val deviceSettings: StateFlow<DevicePreferences> = _deviceSettings
+        .asStateFlow()
+        .filterNotNull()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), DevicePreferences(macAddress = ""))
+
+    val globalSettings = preferences.globalPreferences
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), GlobalPreferences())
+
+    // Load device settings when device is set
+    fun loadDeviceSettings(macAddress: String) {
+        viewModelScope.launch {
+            _deviceSettings.value = preferences.getDevicePreferences(macAddress)
+        }
+    }
+
+    // Device settings methods
     fun updateMaxPower(maxPower: Float) {
-        viewModelScope.launch { preferences.updateMaxPower(maxPower) }
+        currentDeviceMac?.let { mac ->
+            viewModelScope.launch { preferences.updateMaxPower(mac, maxPower) }
+        }
     }
 
     fun updateFullRange(rangeKm: Float) {
-        viewModelScope.launch { preferences.updateFullRange(rangeKm) }
+        currentDeviceMac?.let { mac ->
+            viewModelScope.launch { preferences.updateFullRange(mac, rangeKm) }
+        }
     }
 
     fun updateGreenZone(greenEnd: Float) {
-        val current = settings.value ?: UserPreferences()
-        viewModelScope.launch {
-            preferences.updatePowerZones(greenEnd, current.yellowZoneEnd)
+        currentDeviceMac?.let { mac ->
+            viewModelScope.launch { 
+                val prefs = preferences.getDevicePreferences(mac)
+                preferences.updatePowerZones(mac, greenEnd, prefs.yellowZoneEnd)
+            }
         }
     }
 
     fun updateYellowZone(yellowEnd: Float) {
-        val current = settings.value ?: UserPreferences()
-        viewModelScope.launch {
-            preferences.updatePowerZones(current.greenZoneEnd, yellowEnd)
+        currentDeviceMac?.let { mac ->
+            viewModelScope.launch { 
+                val prefs = preferences.getDevicePreferences(mac)
+                preferences.updatePowerZones(mac, prefs.greenZoneEnd, yellowEnd)
+            }
         }
     }
 
     fun updateDistanceUnit(unit: String) {
-        viewModelScope.launch { preferences.updateDistanceUnit(unit) }
+        currentDeviceMac?.let { mac ->
+            viewModelScope.launch { preferences.updateDistanceUnit(mac, unit) }
+        }
     }
 
     fun updateWarningTemp(warning: Float) {
-        val current = settings.value ?: UserPreferences()
-        viewModelScope.launch {
-            preferences.updateTempThresholds(warning, current.criticalTempC)
+        currentDeviceMac?.let { mac ->
+            viewModelScope.launch { 
+                val prefs = preferences.getDevicePreferences(mac)
+                preferences.updateTempThresholds(mac, warning, prefs.criticalTempC)
+            }
         }
     }
 
     fun updateCriticalTemp(critical: Float) {
-        val current = settings.value ?: UserPreferences()
-        viewModelScope.launch {
-            preferences.updateTempThresholds(current.warningTempC, critical)
+        currentDeviceMac?.let { mac ->
+            viewModelScope.launch { 
+                val prefs = preferences.getDevicePreferences(mac)
+                preferences.updateTempThresholds(mac, prefs.warningTempC, critical)
+            }
         }
     }
 
     fun updateShowPowerGraph(show: Boolean) {
-        viewModelScope.launch { preferences.updateShowPowerGraph(show) }
+        currentDeviceMac?.let { mac ->
+            viewModelScope.launch { preferences.updateShowPowerGraph(mac, show) }
+        }
+    }
+
+    // Global settings
+    fun updateThemeMode(mode: String) {
+        viewModelScope.launch { preferences.updateThemeMode(mode) }
+    }
+
+    fun updateAccentColor(color: Int) {
+        viewModelScope.launch { preferences.updateAccentColor(color) }
+    }
+
+    fun updateAutoReconnect(enabled: Boolean) {
+        viewModelScope.launch { preferences.updateAutoReconnect(enabled) }
+    }
+
+    fun updateDashboardLayout(layout: String) {
+        viewModelScope.launch { preferences.updateDashboardLayout(layout) }
+    }
+
+    fun updatePanelContent(left: String, right: String) {
+        viewModelScope.launch { preferences.updatePanelContent(left, right) }
+    }
+
+    fun updateShowMetricsRow(show: Boolean) {
+        viewModelScope.launch { preferences.updateShowMetricsRow(show) }
+    }
+
+    fun updateShowSpeedTop(show: Boolean) {
+        viewModelScope.launch { preferences.updateShowSpeedTop(show) }
     }
 }

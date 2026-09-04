@@ -14,8 +14,9 @@ class BmsRepository @Inject constructor(
     val bmsData: Flow<BmsData> = combine(
         bleManager.bmsData,
         bleManager.connectionState,
-        bleManager.deviceName
-    ) { data, state, deviceName ->
+        bleManager.deviceName,
+        bleManager.connectedDeviceMac
+    ) { data, state, deviceName, macAddress ->
         if (data != null && state == BleManager.ConnectionState.CONNECTED) {
             BmsData(
                 voltage = data.voltage,
@@ -27,7 +28,7 @@ class BmsRepository @Inject constructor(
                 cycles = data.cycles,
                 temperature = data.temperature,
                 connected = true,
-                deviceName = deviceName ?: "Unknown BMS",
+                deviceName = macAddress ?: deviceName ?: "Unknown BMS",
                 timestamp = System.currentTimeMillis()
             )
         } else {

@@ -22,7 +22,8 @@ fun DashboardScreen(
     viewModel: DashboardViewModel = hiltViewModel()
 ) {
     val bmsData by viewModel.bmsData.collectAsStateWithLifecycle()
-    val settings by viewModel.settings.collectAsStateWithLifecycle()
+    val deviceSettings by viewModel.deviceSettings.collectAsStateWithLifecycle()
+    val globalSettings by viewModel.globalSettings.collectAsStateWithLifecycle()
     val speedKmh by viewModel.speedKmh.collectAsStateWithLifecycle()
     val isGpsEnabled by viewModel.isGpsEnabled.collectAsStateWithLifecycle()
 
@@ -42,14 +43,16 @@ fun DashboardScreen(
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            // Speed display at top center
-            SpeedDisplay(
-                speedKmh = speedKmh,
-                isGpsEnabled = isGpsEnabled,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 8.dp, bottom = 16.dp)
-            )
+            // Speed display at top center (controlled by global settings)
+            if (globalSettings.showSpeedTop) {
+                SpeedDisplay(
+                    speedKmh = speedKmh,
+                    isGpsEnabled = isGpsEnabled,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp, bottom = 16.dp)
+                )
+            }
 
             // Main dashboard row: SOC/Range on left, power meter on right
             Row(
@@ -72,7 +75,7 @@ fun DashboardScreen(
                     Spacer(modifier = Modifier.height(16.dp))
                     RangeDisplay(
                         range = bmsData.range,
-                        unit = settings.distanceUnit
+                        unit = deviceSettings.distanceUnit
                     )
                 }
 
@@ -81,24 +84,26 @@ fun DashboardScreen(
                 // Right: Power sweep meter
                 PowerSweepMeter(
                     power = bmsData.power,
-                    maxPower = settings.maxPower,
-                    greenZoneEnd = settings.greenZoneEnd,
-                    yellowZoneEnd = settings.yellowZoneEnd,
+                    maxPower = deviceSettings.maxPower,
+                    greenZoneEnd = deviceSettings.greenZoneEnd,
+                    yellowZoneEnd = deviceSettings.yellowZoneEnd,
                     modifier = Modifier.weight(1.5f)
                 )
             }
 
-            // Bottom metrics row
-            MetricsRow(
-                current = bmsData.current,
-                voltage = bmsData.voltage,
-                temperature = bmsData.temperature,
-                capacity = bmsData.capacity,
-                totalCapacity = bmsData.totalCapacity
-            )
+            // Bottom metrics row (controlled by global settings)
+            if (globalSettings.showMetricsRow) {
+                MetricsRow(
+                    current = bmsData.current,
+                    voltage = bmsData.voltage,
+                    temperature = bmsData.temperature,
+                    capacity = bmsData.capacity,
+                    totalCapacity = bmsData.totalCapacity
+                )
+            }
 
-            // Optional: Power graph (when enabled)
-            if (settings.showPowerGraph) {
+            // Optional: Power graph (when enabled in device settings)
+            if (deviceSettings.showPowerGraph) {
                 PowerGraph(
                     powerHistory = viewModel.powerHistory,
                     modifier = Modifier

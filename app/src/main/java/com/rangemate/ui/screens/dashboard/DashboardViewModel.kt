@@ -2,8 +2,9 @@ package com.rangemate.ui.screens.dashboard
 
 import com.rangemate.data.location.SpeedProvider
 import com.rangemate.data.model.BmsData
+import com.rangemate.data.preferences.DevicePreferences
+import com.rangemate.data.preferences.GlobalPreferences
 import com.rangemate.data.preferences.PreferencesManager
-import com.rangemate.data.preferences.UserPreferences
 import com.rangemate.data.repository.BmsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -21,8 +22,19 @@ class DashboardViewModel @Inject constructor(
     val bmsData: StateFlow<BmsData> = bmsRepository.bmsData
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), BmsData())
 
-    val settings: StateFlow<UserPreferences> = preferences.userPreferences
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), UserPreferences())
+    // Per-device settings based on connected device
+    val deviceSettings: StateFlow<DevicePreferences> = bmsRepository.bmsData
+        .filter { it.connected }
+        .distinctUntilChangedBy { it.deviceName }
+        .flatMapLatest { bmsData ->
+            val mac = bmsData.deviceName // deviceName now holds MAC address
+            preferences.getDevicePreferencesFlow(mac)
+        }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), DevicePreferences(macAddress = ""))
+
+    // Global settings
+    val globalSettings: StateFlow<GlobalPreferences> = preferences.globalPreferences
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), GlobalPreferences())
 
     val speedKmh: StateFlow<Float> = speedProvider.speedKmh
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0f)

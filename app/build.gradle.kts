@@ -79,8 +79,9 @@ dependencies {
     ksp("com.google.dagger:hilt-android-compiler:2.52")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
-    // DataStore (disabled for now - using in-memory preferences)
+    // DataStore (disabled for now - using in-memory preferences with per-device structure)
     // implementation("androidx.datastore:datastore-preferences:1.1.1")
+    implementation("androidx.datastore:datastore-core:1.1.1")
 
     // Location for GPS speed
     implementation("com.google.android.gms:play-services-location:21.3.0")

@@ -1,4 +1,5 @@
 package com.rangemate.ui.screens.debug
+import android.annotation.SuppressLint
 
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothGatt
@@ -219,6 +220,7 @@ fun DebugScreen(
                         Text("Scan Results", style = MaterialTheme.typography.titleMedium)
                         Spacer(modifier = Modifier.height(8.dp))
                         LazyColumn {
+                            @SuppressLint("MissingPermission")
                             items(scanResults) { result ->
                                 Text(text = "${result.device.name ?: "Unknown"} - ${result.device.address} (RSSI: ${result.rssi})", fontSize = 12.sp)
                             }

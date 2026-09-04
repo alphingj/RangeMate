@@ -1,4 +1,5 @@
 package com.rangemate.ui.screens.connect
+import android.annotation.SuppressLint
 
 import android.Manifest
 import android.bluetooth.BluetoothAdapter
@@ -158,6 +159,7 @@ fun ConnectScreen(
 }
 
 @Composable
+@SuppressLint("MissingPermission")
 private fun DeviceItem(
     scanResult: ScanResult,
     onClick: () -> Unit

@@ -98,10 +98,14 @@ jobs:
           RELEASE_KEY_PASSWORD: android
         run: ./gradlew :app:assembleRelease --no-daemon
 
+      - name: Rename APK to Rangemate-arm64.apk
+        run: |
+          mv app/build/outputs/apk/release/*.apk Rangemate-arm64.apk
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: app/build/outputs/apk/release/*.apk
+          files: Rangemate-arm64.apk
           generate_release_notes: true
           draft: false
           prerelease: false

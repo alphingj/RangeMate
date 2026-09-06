@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -5,6 +7,16 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
 }
+
+// Field-test secrets from gitignored local.properties (never committed).
+val localSecrets = Properties().apply {
+    rootProject.file("local.properties").takeIf { it.exists() }?.inputStream()?.use(::load)
+}
+fun secretOrEmpty(name: String): String =
+    (localSecrets.getProperty(name) ?: project.findProperty(name) as String? ?: "").replace("\"", "")
+
+val appVersionName = "1.0"
+val appVersionCode = 1
 
 android {
     namespace = "com.rangemate"
@@ -14,8 +26,14 @@ android {
         applicationId = "com.rangemate"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = appVersionCode
+        versionName = appVersionName
+        buildConfigField("String", "APP_VERSION_NAME", "\"$appVersionName\"")
+        buildConfigField("int", "APP_VERSION_CODE", "$appVersionCode")
+        // Telegram upload credentials default to empty (feature disabled);
+        // real values are injected for debug builds below only.
+        buildConfigField("String", "TELEGRAM_BOT_TOKEN", "\"\"")
+        buildConfigField("String", "TELEGRAM_CHAT_ID", "\"\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -50,6 +68,9 @@ android {
         debug {
             isMinifyEnabled = false
             isDebuggable = true
+            // Field-test log upload credentials (debug builds only; release stays empty).
+            buildConfigField("String", "TELEGRAM_BOT_TOKEN", "\"${secretOrEmpty("TELEGRAM_BOT_TOKEN")}\"")
+            buildConfigField("String", "TELEGRAM_CHAT_ID", "\"${secretOrEmpty("TELEGRAM_CHAT_ID")}\"")
         }
     }
 
@@ -64,6 +85,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     packaging {

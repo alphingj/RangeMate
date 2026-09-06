@@ -208,11 +208,11 @@ data class RangePrediction(
     val timestamp: Long
 ) {
     fun formatRange(): String {
-        return String.format("%.1f km", estimatedRangeKm)
+        return String.format(java.util.Locale.US, "%.1f km", estimatedRangeKm)
     }
-    
+
     fun formatConfidence(): String {
-        return String.format("%.0f%%", confidence * 100)
+        return String.format(java.util.Locale.US, "%.0f%%", confidence * 100)
     }
 }
 

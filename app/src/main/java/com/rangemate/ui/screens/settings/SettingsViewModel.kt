@@ -8,7 +8,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -26,6 +27,23 @@ class SettingsViewModel @Inject constructor(
 
     fun setCurrentDevice(macAddress: String) {
         currentDeviceMac = macAddress
+        loadDeviceSettings(macAddress)
+    }
+
+    init {
+        // Bind to the last-connected device so device sliders edit a real
+        // device instead of a phantom. Falls back to explicit setCurrentDevice.
+        viewModelScope.launch {
+            preferences.globalPreferences
+                .map { it.lastConnectedDeviceMac }
+                .distinctUntilChanged()
+                .collect { mac ->
+                    if (mac != null) {
+                        currentDeviceMac = mac
+                        _deviceSettings.value = preferences.getDevicePreferences(mac)
+                    }
+                }
+        }
     }
 
     // Device settings as a reactive flow

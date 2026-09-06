@@ -9,6 +9,10 @@ data class BmsData(
     val totalCapacity: Float = 0f,     // Total capacity in Ah
     val cycles: Int = 0,               // Charge cycles
     val temperature: Float = 0f,       // Temperature in °C
+    val cellVoltages: List<Float> = emptyList(), // Per-cell voltages in V
+    val protectionStatus: Int = 0,   // Protection bitmask (JBD table)
+    val fetStatus: Int = 0,          // MOS/FET state (bit0=charge, bit1=discharge)
+    val manufacturer: String = "",   // Reporting protocol/driver
     val connected: Boolean = false,
     val deviceName: String = "",
     val timestamp: Long = System.currentTimeMillis()

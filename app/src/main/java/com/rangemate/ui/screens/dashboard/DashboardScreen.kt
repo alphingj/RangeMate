@@ -10,8 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.rangemate.data.model.BmsData
-import com.rangemate.data.range.AdaptiveRangeEngine
 import com.rangemate.data.range.DrivingPattern
 import com.rangemate.data.range.RangePrediction
 import com.rangemate.ui.screens.dashboard.components.*
@@ -31,6 +29,7 @@ fun DashboardScreen(
     val isGpsEnabled by viewModel.isGpsEnabled.collectAsStateWithLifecycle()
     val rangePrediction by viewModel.rangePrediction.collectAsStateWithLifecycle<RangePrediction?>()
     val drivingPattern by viewModel.drivingPattern.collectAsStateWithLifecycle<DrivingPattern?>()
+    val powerHistory by viewModel.powerHistory.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
@@ -53,6 +52,7 @@ fun DashboardScreen(
                 SpeedDisplay(
                     speedKmh = speedKmh,
                     isGpsEnabled = isGpsEnabled,
+                    unit = deviceSettings.distanceUnit,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 8.dp, bottom = 16.dp)
@@ -83,11 +83,12 @@ fun DashboardScreen(
                     if (rangePrediction != null) {
                         AdaptiveRangeDisplay(
                             prediction = rangePrediction,
+                            unit = deviceSettings.distanceUnit,
                             modifier = Modifier.fillMaxWidth()
                         )
                     } else {
                         RangeDisplay(
-                            range = bmsData.range,
+                            rangeKm = bmsData.range,
                             unit = deviceSettings.distanceUnit
                         )
                     }
@@ -116,16 +117,13 @@ fun DashboardScreen(
                 )
             }
 
-            // Optional: Power graph (when enabled in device settings)
-            if (deviceSettings.showPowerGraph) {
-                PowerGraph(
-                    powerHistory = viewModel.powerHistory,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(120.dp)
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
-                )
-            }
+            // Power graph (collapses cleanly when disabled in device settings)
+            PowerGraph(
+                isVisible = deviceSettings.showPowerGraph,
+                powerHistory = powerHistory,
+                maxPowerSetting = deviceSettings.maxPower,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+            )
         }
     }
 }

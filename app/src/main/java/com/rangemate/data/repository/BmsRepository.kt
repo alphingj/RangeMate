@@ -15,8 +15,9 @@ class BmsRepository @Inject constructor(
         bleManager.bmsData,
         bleManager.connectionState,
         bleManager.deviceName,
-        bleManager.connectedDeviceMac
-    ) { data, state, deviceName, macAddress ->
+        bleManager.connectedDeviceMac,
+        bleManager.cellVoltages
+    ) { data, state, deviceName, macAddress, cells ->
         if (data != null && state == BleManager.ConnectionState.CONNECTED) {
             BmsData(
                 voltage = data.voltage,
@@ -27,6 +28,10 @@ class BmsRepository @Inject constructor(
                 totalCapacity = data.totalCapacity,
                 cycles = data.cycles,
                 temperature = data.temperature,
+                cellVoltages = cells,
+                protectionStatus = data.protectionStatus,
+                fetStatus = data.fetStatus,
+                manufacturer = data.manufacturer,
                 connected = true,
                 deviceName = macAddress ?: deviceName ?: "Unknown BMS",
                 timestamp = System.currentTimeMillis()

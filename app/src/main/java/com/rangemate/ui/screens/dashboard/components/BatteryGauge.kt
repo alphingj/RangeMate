@@ -75,7 +75,7 @@ fun BatteryGauge(
                 color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-                text = String.format("%.1f V", voltage),
+                text = String.format(java.util.Locale.US, "%.1f V", voltage),
                 fontSize = 24.sp,
                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
             )

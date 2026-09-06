@@ -28,25 +28,25 @@ fun MetricsRow(
     ) {
         MetricCard(
             label = "Current",
-            value = String.format("%.1f A", current),
+            value = String.format(java.util.Locale.US,"%.1f A", current),
             modifier = Modifier.weight(1f)
         )
         Spacer(modifier = Modifier.width(8.dp))
         MetricCard(
             label = "Voltage",
-            value = String.format("%.1f V", voltage),
+            value = String.format(java.util.Locale.US,"%.1f V", voltage),
             modifier = Modifier.weight(1f)
         )
         Spacer(modifier = Modifier.width(8.dp))
         MetricCard(
             label = "Temp",
-            value = String.format("%.0f°C", temperature),
+            value = String.format(java.util.Locale.US,"%.0f°C", temperature),
             modifier = Modifier.weight(1f)
         )
         Spacer(modifier = Modifier.width(8.dp))
         MetricCard(
             label = "Capacity",
-            value = String.format("%.1f/%.1f Ah", capacity, totalCapacity),
+            value = String.format(java.util.Locale.US,"%.1f/%.1f Ah", capacity, totalCapacity),
             modifier = Modifier.weight(1f)
         )
     }

@@ -35,7 +35,7 @@ fun PowerSweepMeter(
     Column(modifier = modifier) {
         // Power value display
         Text(
-            text = String.format("%.0f W", power),
+            text = String.format(java.util.Locale.US,"%.0f W", power),
             fontSize = 48.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary
@@ -111,17 +111,17 @@ fun PowerSweepMeter(
                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
             )
             Text(
-                text = String.format("%.0f", greenZoneEnd),
+                text = String.format(java.util.Locale.US,"%.0f", greenZoneEnd),
                 fontSize = 12.sp,
                 color = PowerZoneGreen
             )
             Text(
-                text = String.format("%.0f", yellowZoneEnd),
+                text = String.format(java.util.Locale.US,"%.0f", yellowZoneEnd),
                 fontSize = 12.sp,
                 color = PowerZoneYellow
             )
             Text(
-                text = String.format("%.0f", maxPower),
+                text = String.format(java.util.Locale.US,"%.0f", maxPower),
                 fontSize = 12.sp,
                 color = PowerZoneRed
             )

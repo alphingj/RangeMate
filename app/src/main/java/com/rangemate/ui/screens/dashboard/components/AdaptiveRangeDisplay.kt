@@ -17,8 +17,11 @@ import com.rangemate.data.range.RangePrediction
 @Composable
 fun AdaptiveRangeDisplay(
     prediction: RangePrediction?,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    unit: String = "km"
 ) {
+    val imperial = unit == "mi"
+    val unitLabel = if (imperial) "mi" else "km"
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -32,7 +35,12 @@ fun AdaptiveRangeDisplay(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = String.format("%.1f km", p.estimatedRangeKm),
+                    text = String.format(
+                        java.util.Locale.US,
+                        "%.1f %s",
+                        convertKm(p.estimatedRangeKm, imperial),
+                        unitLabel
+                    ),
                     fontSize = 48.sp,
                     fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
                     color = MaterialTheme.colorScheme.primary
@@ -53,7 +61,7 @@ fun AdaptiveRangeDisplay(
             Spacer(modifier = Modifier.height(8.dp))
             
             // Scenario ranges
-            ScenarioRow(scenarios = p.rangeScenarios)
+            ScenarioRow(scenarios = p.rangeScenarios, imperial = imperial, unitLabel = unitLabel)
             
             Spacer(modifier = Modifier.height(8.dp))
             
@@ -105,7 +113,7 @@ private fun ConfidenceBadge(confidence: Float) {
 }
 
 @Composable
-private fun ScenarioRow(scenarios: Map<String, Float>) {
+private fun ScenarioRow(scenarios: Map<String, Float>, imperial: Boolean, unitLabel: String) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly
@@ -121,7 +129,12 @@ private fun ScenarioRow(scenarios: Map<String, Float>) {
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
                     )
                     Text(
-                        text = String.format("%.1f km", rangeKm),
+                        text = String.format(
+                            java.util.Locale.US,
+                            "%.1f %s",
+                            convertKm(rangeKm, imperial),
+                            unitLabel
+                        ),
                         fontSize = 12.sp,
                         fontWeight = androidx.compose.ui.text.font.FontWeight.Medium
                     )
@@ -130,6 +143,9 @@ private fun ScenarioRow(scenarios: Map<String, Float>) {
         }
     }
 }
+
+private fun convertKm(km: Float, imperial: Boolean): Float =
+    if (imperial) km * 0.621371f else km
 
 private fun formatPattern(pattern: DrivingPattern): String {
     return when (pattern) {

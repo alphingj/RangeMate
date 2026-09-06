@@ -14,20 +14,23 @@ import androidx.compose.ui.unit.sp
 fun SpeedDisplay(
     speedKmh: Float,
     isGpsEnabled: Boolean,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    unit: String = "km"
 ) {
+    val imperial = unit == "mi"
+    val speed = if (imperial) speedKmh * KMH_TO_MPH else speedKmh
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = String.format("%.0f", speedKmh),
+            text = String.format(java.util.Locale.US, "%.0f", speed),
             fontSize = 96.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary
         )
         Text(
-            text = "km/h",
+            text = if (imperial) "mph" else "km/h",
             fontSize = 24.sp,
             color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
         )
@@ -40,3 +43,5 @@ fun SpeedDisplay(
         }
     }
 }
+
+private const val KMH_TO_MPH = 0.621371f

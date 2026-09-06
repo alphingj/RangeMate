@@ -20,6 +20,9 @@
     <!-- Keep screen on while app is active -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+    <!-- Field-test log upload (Telegram) -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature
         android:name="android.hardware.bluetooth_le"
         android:required="true" />
@@ -36,6 +39,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RangeMate"
         tools:targetApi="35">
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
         <activity
             android:name=".MainActivity"

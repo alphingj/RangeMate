@@ -51,6 +51,16 @@ class PreferencesManager @Inject constructor() {
     private val _globalPreferences = MutableStateFlow(GlobalPreferences())
     val globalPreferences: Flow<GlobalPreferences> = _globalPreferences.asStateFlow()
 
+    /** Synchronous snapshot for background components (e.g. auto-reconnect). */
+    fun globalSnapshot(): GlobalPreferences = _globalPreferences.value
+
+    /** Seeds the reactive flow from already-stored values instead of defaults. */
+    private fun getOrCreateDeviceFlow(macAddress: String): MutableStateFlow<DevicePreferences> {
+        return devicePreferencesFlows.getOrPut(macAddress) {
+            MutableStateFlow(devicePreferencesMap.getOrPut(macAddress) { DevicePreferences(macAddress = macAddress) })
+        }
+    }
+
     private val devicePreferencesFlows = mutableMapOf<String, MutableStateFlow<DevicePreferences>>()
 
     // =========================================================================
@@ -66,12 +76,6 @@ class PreferencesManager @Inject constructor() {
     // =========================================================================
     // PER-DEVICE PREFERENCES
     // =========================================================================
-
-    private fun getOrCreateDeviceFlow(macAddress: String): MutableStateFlow<DevicePreferences> {
-        return devicePreferencesFlows.getOrPut(macAddress) {
-            MutableStateFlow(DevicePreferences(macAddress = macAddress))
-        }
-    }
 
     suspend fun getDevicePreferences(macAddress: String): DevicePreferences {
         return devicePreferencesMap.getOrPut(macAddress) { DevicePreferences(macAddress = macAddress) }

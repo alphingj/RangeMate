@@ -5,6 +5,7 @@ import com.rangemate.data.repository.BmsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -44,6 +45,7 @@ class RideTracker @Inject constructor(
     private var isTracking = false
 
     private val scope = CoroutineScope(Dispatchers.IO)
+    private var collectJob: Job? = null
 
     // Ride detection thresholds
     private val MIN_RIDE_SPEED_KMH = 3f
@@ -59,14 +61,16 @@ class RideTracker @Inject constructor(
 
     fun stopTracking(): RangePrediction? {
         isTracking = false
+        collectJob?.cancel()
+        collectJob = null
         finalizeSegment()
         return adaptiveRangeEngine.rangePrediction.value
     }
 
     private fun startCollecting() {
-        scope.launch {
-            val flow = bmsRepository.bmsData as kotlinx.coroutines.flow.Flow<BmsData>
-            flow
+        collectJob?.cancel()
+        collectJob = scope.launch {
+            bmsRepository.bmsData
                 .filter { bms -> bms.connected }
                 .distinctUntilChanged { prev, next -> prev.timestamp == next.timestamp }
                 .collect { bmsData ->

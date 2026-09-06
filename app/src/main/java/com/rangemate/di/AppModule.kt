@@ -2,8 +2,14 @@ package com.rangemate.di
 
 import android.content.Context
 import com.rangemate.data.ble.BleManager
+import com.rangemate.data.ble.BmsScanFilter
 import com.rangemate.data.location.SpeedProvider
+import com.rangemate.data.log.RawPacketLogger
+import com.rangemate.data.log.TelegramLogUploader
 import com.rangemate.data.preferences.PreferencesManager
+import com.rangemate.data.protocol.ProtocolAutoDetector
+import com.rangemate.data.protocol.ProtocolRegistry
+import com.rangemate.data.protocol.komaki.KomakiExtendedParser
 import com.rangemate.data.range.AdaptiveRangeEngine
 import com.rangemate.data.range.RangeViewModel
 import com.rangemate.data.range.RideTracker
@@ -21,9 +27,49 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideBleManager(
+    fun provideRawPacketLogger(
         @ApplicationContext context: Context
-    ): BleManager = BleManager(context)
+    ): RawPacketLogger = RawPacketLogger(context)
+
+    @Provides
+    @Singleton
+    fun provideBmsScanFilter(
+        logger: RawPacketLogger
+    ): BmsScanFilter = BmsScanFilter(logger)
+
+    @Provides
+    @Singleton
+    fun provideTelegramLogUploader(): TelegramLogUploader = TelegramLogUploader()
+
+    @Provides
+    @Singleton
+    fun provideProtocolRegistry(): ProtocolRegistry = ProtocolRegistry()
+
+
+
+    @Provides
+    @Singleton
+    fun provideKomakiExtendedParser(
+        logger: RawPacketLogger
+    ): KomakiExtendedParser = KomakiExtendedParser(logger)
+
+    @Provides
+    @Singleton
+    fun provideBleManager(
+        @ApplicationContext context: Context,
+        protocolRegistry: ProtocolRegistry,
+        protocolAutoDetector: ProtocolAutoDetector,
+        logger: RawPacketLogger,
+        scanFilter: BmsScanFilter,
+        preferences: PreferencesManager
+    ): BleManager = BleManager(context, protocolRegistry, protocolAutoDetector, logger, scanFilter, preferences)
+
+    @Provides
+    @Singleton
+    fun provideProtocolAutoDetector(
+        registry: ProtocolRegistry,
+        logger: RawPacketLogger
+    ): ProtocolAutoDetector = ProtocolAutoDetector(registry, logger)
 
     @Provides
     @Singleton

@@ -12,16 +12,18 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun RangeDisplay(
-    range: Float,
+    rangeKm: Float,
     unit: String,
     modifier: Modifier = Modifier
 ) {
+    // rangeKm is always kilometers; convert for imperial display.
+    val display = if (unit == "mi") rangeKm * KM_TO_MI else rangeKm
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = String.format("%.0f", range),
+            text = String.format(java.util.Locale.US, "%.0f", display),
             fontSize = 56.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary
@@ -39,3 +41,5 @@ fun RangeDisplay(
         )
     }
 }
+
+private const val KM_TO_MI = 0.621371f
